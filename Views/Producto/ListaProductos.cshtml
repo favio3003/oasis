@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "ListaProductos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.light.css" />
+<script src="https://cdn3.devexpress.com/jslib/21.2.4/js/dx.all.js"></script>
+
+
+
+
+
+<link href="~/UPLOAD/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+<link href="~/UPLOAD/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css" />
+<script src="~/UPLOAD/js/fileinput.js?v=15" type="text/javascript"></script>
+<script src="~/UPLOAD/js/locales/es.js" type="text/javascript"></script>
+<script src="~/UPLOAD/themes/fas/theme.js" type="text/javascript"></script>
+
+
+
+
+<div class="panel panel-container">
+    <h2>Productos</h2>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div id="formGestion" class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-1 col-md-1 col-md-1">
+                            <button id="btnNuevo" class="btn btn-secondary btn-sm rounded float-right" title="Adicionar">
+                                <img src="~/Content/open-iconic/svg/plus.svg" alt="Adicionar">
+                            </button>
+
+                        </div>
+
+                    </div>
+                    <div class="demo-container">
+                        <div id="grid"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade " id="AgregarProducto" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Producto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style=" height: 400px; width: 100%; overflow-y: auto;">
+
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-2 col-sm-2  label-align">Nombre:</label>
+                        <div class="col-md-9 col-sm-9">
+                            <input class="form-control" id="txtNombre" placeholder="Nombre" maxlength="100" required="required" />
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-2 col-sm-2  label-align">Descripcion Corta:</label>
+                        <div class="col-md-9 col-sm-9">
+                            <textarea id="txtDescripcionCorta" class="form-control" placeholder="Descripcion Corta" maxlength="700" rows="3" required="required"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-2 col-sm-2  label-align">Descripcion Larga:</label>
+                        <div class="col-md-9 col-sm-9">
+                            <textarea id="txtDescripcionLarga" class="form-control" maxlength="3500" placeholder="Descripcion Larga" rows="5" required="required"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="field item form-group">
+                        <div class="col-md-2 col-sm-2"></div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group row">
+                                <label>Precio</label>
+                                <input id="txtPrecio" type="number" min="0" placeholder="0" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1"></div>
+
+                        <div class="col-md-3 col-sm-3" id="txtPrecioOfertafor">
+                            <div class="form-group row">
+                                <label>Precio Oferta</label>
+                                <input id="txtPrecioOferta" type="number" placeholder="0" min="0" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 col-sm-1"></div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group row">
+                                <label>Estado</label>
+                                <select class="form-control" id="txtEstado">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1">
+                        </div>
+
+
+                    </div>
+
+                    <div class="field item form-group">
+
+                        <div class="col-md-2 col-sm-2">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group row">
+                                <label>Cantidad</label>
+                                <input id="txtCantidad" type="number" min="0" placeholder="0" class="form-control" required />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1 col-sm-1">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group row">
+                                <label>Caracteristica</label>
+                                <select class="form-control" id="txtCaracteristica">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1">
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group row">
+                                <label>Tipo</label>
+                                <select class="form-control" id="txtTipo">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1">
+                        </div>
+
+                    </div>
+
+                    @*<div class="field item form-group" id="ImagenesSubidas">
+        
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group row">
+                                <label>Imagenes Subidas</label>
+
+                            </div>
+                            <div  class="scrollparaDiv">
+                                
+                                <div class="ContenerTodo" id="CargarImagnesSubidas">
+
+                                </div>
+
+                            </div> 
+
+                        </div>
+
+                    </div>*@
+
+                    <div class="field item form-group">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group row">
+                                <label>Imagen de Portada</label>
+                                <div class="file-loading">
+                                    <input id="PortadadeProducto" name="file-es[]" type="file" multiple>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="field item form-group">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group row">
+                                <label>Imagenes del Producto</label>
+                                <div class="file-loading">
+                                    <input id="Productos" name="file-es[]" type="file" multiple>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-bd-primary" id="btnGuardar">Guardar</button>
+                    <button class="btn btn-bd-primary" id="btnEditar">Editar</button>
+                    <a id="btnCancelar" class="btn btn-bd-download" href="#"
+                       data-dismiss="modal">Cancelar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+
+</script>
+<style>
+    .TablaCompleta:hover {
+        background: #c4c0c0;
+        cursor: pointer;
+    }
+    .TablaCompleta {
+        border: #cacaca 1px solid;
+    }
+    .alinearcentro {
+        text-align: center;
+    }
+
+    .alinearderecha {
+        text-align: right;
+    }
+
+</style>
+
+<script src="~/JS/ListaProductos.js?v=136"></script>

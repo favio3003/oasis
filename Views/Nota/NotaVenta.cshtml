@@ -1,0 +1,322 @@
+﻿
+@{
+    ViewBag.Title = "NotaVenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.light.css" />
+<script src="https://cdn3.devexpress.com/jslib/21.2.4/js/dx.all.js"></script>
+
+<div class="panel panel-container">
+   
+    
+    <div id="wizard" class="form_wizard wizard_horizontal">
+        <ul class="wizard_steps">
+            <li>
+                <a>
+                    <span id="Menustep-1" class="step_no">1</span>
+                    <span class="step_descr">
+                        Carrito<br />
+                        <small>Administra tu vista de Productos</small>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                   
+                    <span id="Menustep-2" class="step_no">2</span>
+                    <span class="step_descr">
+                        Verificar Detalles<br />
+                        <small>Verificar tu lista de Productos</small>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <span  id="Menustep-3" class="step_no">3</span>
+                    <span class="step_descr">
+                        Completar Pedido<br />
+                        <small>Revisar y envia tu pedido</small>
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+        <div id="step-1">
+          
+            <h2>Carrito</h2>
+   
+            <div class="cart-main-area ptb--100 bg__white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Imagen</th>
+                                            <th class="product-name">Nombre</th>
+                                            <th class="product-price">Precio</th>
+                                            <th class="product-quantity">Cantidad</th>
+                                            <th class="product-subtotal">Subtotal</th>
+                                            <th class="product-remove">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TablaVenta">
+                                        @*<tr>
+                            <td class="product-thumbnail"><a href="#"><img src="images/product-2/cart-img/1.jpg" alt="product img" /></a></td>
+                            <td class="product-name">
+                                <a href="#">New Dress For Sunday</a>
+                            </td>
+                            <td class="product-price"><span class="amount">£165.00</span></td>
+                            <td class="product-quantity"><input type="number" value="1" max="" /></td>
+                            <td class="product-subtotal">£165.00</td>
+                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
+                        </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+
+
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12 smt-40 xmt-40">
+                   
+                            <div class="htc__cart__total">                            
+                                <div style="background-color:#ebebeb">
+                                    <h6>Carta del total</h6>
+                                    <div class="cart__desk__list">
+
+
+                                        <ul class="cart__desc">
+                                            <li>Total del Carrito</li>
+
+                                        </ul>
+                                        <ul class="cart__price">
+                                            <li id="TotalCarritonota"></li>
+                                        </ul>
+                                    </div>
+                                    <br />
+                                </div>
+
+
+
+                            </div>
+
+                     
+
+                        </div>
+
+
+
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <br />
+                            <div class="buttons-cart--inner">
+                                <div class="buttons-cart">
+
+                                </div>
+                                <div class="buttons-cart checkout--btn">
+                                    <a href="/Home/Index">Añadir mas Productos</a>
+                                    <a id="Continuarstep1">
+                                        Continuar con el Pedido
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+            </div>
+
+
+        </div>
+        
+        <div id="step-2">
+            <script>
+                $("#step-2").hide();
+                $("#Menustep-2").attr('style', 'background:#c1c1c1');
+                $("#Menustep-3").attr('style', 'background:#c1c1c1');
+            </script>
+            <h2>Verificar Detalle</h2>
+            <br />
+            <br />
+            <div class="row" style="background-color: #ffffff">
+                <div class="col-md-8">
+
+                    <div class="container">
+
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" maxlength="100" placeholder="Nombre / Razon Social" id="RazonSocial">
+                        </div>
+
+                        <div class="col-md-12">
+
+
+                            <br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" maxlength="50" placeholder="NIT" id="NIT">
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <textarea rows="3" type="text" class="form-control" maxlength="1000" placeholder="Direccion" id="Direccion1"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" maxlength="200" placeholder="Numero de casa y nombre de la calles" id="Direccion2">
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" maxlength="200" placeholder="Apartamento, habitacion, etc. (opcional)" id="Direccion3">
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" maxlength="80"  placeholder="Dirección de correo electrónico" id="DireccionCorreo">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" maxlength="8" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"placeholder="Teléfono" id="Telefono">
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+                        <div class="col-md-12">
+                            <textarea id="Descripcion" class="form-control" maxlength="1500" placeholder="Notas sobre el pedido" rows="3" required="required"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+                        <div class="col-md-12">
+                          
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                            <br />
+                        </div>
+           
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="order-details">
+                        <h5 class="order-details__title">Tu orden</h5>
+                        <div class="order-details__item">
+                            <div class="single-item">
+
+                                <div class="demo-container">
+                                    <div id="griddetallenota"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <select id="Pedido" class="form-control" required>
+                            <option value="0">FORMA DE PAGO..</option>
+                            <option value="1">CONTRA ENTREGA</option>
+                            <option value="2">PAGO EN LINEA</option>
+
+                        </select>
+                        <div class="order-details__count">
+
+                            <div class="order-details__count__single">
+                                <h5>sub total</h5>
+                                <span class="priceSuptotal" id="Subtotaaldetalle"></span>
+                            </div>
+                            <div class="order-details__count__single">
+                                <h5>Envio</h5>
+                                <span class="priceSuptotal">Bs. 30.00</span>
+                            </div>
+                        </div>
+                        <div class="ordre-details__total">
+                            <h5>Order total</h5>
+                            <span class="price" id="TotalPedido"></span>
+                        </div>
+                    </div>
+
+                    <div class="buttons-cart checkout--btn">
+                        <a id="Continuarstep2">Continuar con el Pedido</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div id="step-3">
+            <script>
+                $("#step-3").hide();
+            </script>
+            <h2>
+                Completar
+            </h2>
+            <br />
+            <br />
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<script src="~/JS/NotaVenta.js?v=52"></script>
+
+

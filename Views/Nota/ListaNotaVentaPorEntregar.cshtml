@@ -1,0 +1,325 @@
+﻿
+@{
+    ViewBag.Title = "Lista Venta Por Entregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.4/css/dx.light.css" />
+<script src="https://cdn3.devexpress.com/jslib/21.2.4/js/dx.all.js"></script>
+
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<div class="panel panel-container">
+    <h2>Lista Venta Por Entregar</h2>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div id="formGestion" class="container-fluid">
+                
+                    <div class="demo-container">
+                        <div id="gridVenta"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade " id="AgregarVenta" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nota venta</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style=" height: 400px; width: 100%; overflow-y: auto;">
+
+
+                    <div class="container">
+
+
+                        <div class="col-md-6">
+                            <div class="form-group-sm">
+                                <label>Nombre / Razon Social:</label>
+                                <input type="text" class="form-control" maxlength="100" placeholder="Nombre / Razon Social" id="txtRazonSocial">
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+
+                            <div class="form-group-sm">
+                                <label>NIT:</label>
+
+                                <input type="text" class="form-control" maxlength="50" placeholder="NIT" id="txtNIT">
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="col-md-6">
+
+
+                            <div class="form-group-sm">
+                                <label>Teléfono:</label>
+                                <input type="text" class="form-control" maxlength="8" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" placeholder="Teléfono" id="txtTelefono">
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group-sm">
+                                <label>Fecha:</label>
+
+                                <input type="date" class="form-control" id="txtFecha">
+                            </div>
+
+                        </div>
+
+                        <div id="lEstado" class="col-md-4">
+                            <div class="form-group-sm">
+                                <label>Estado:</label>
+
+                                <select id="Estado" class="form-control" required>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div id="lEntrega" class="col-md-4">
+                            <div class="form-group-sm">
+                                <label>Entrega:</label>
+
+                                <select id="Entrega" class="form-control" required>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div id="lDireccionCorreo" class="col-md-4">
+                            <div class="form-group-sm">
+                                <label>Dirección de correo electrónico:</label>
+                                <input type="email" class="form-control" maxlength="80" placeholder="Dirección de correo electrónico" id="DireccionCorreo">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group-sm">
+                                <label>Direccion:</label>
+
+                                <textarea type="text" class="form-control" maxlength="1000" placeholder="Direccion" id="txtDireccion1" rows="3"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div id="ltxtDireccion2" class="col-md-12">
+                            <div class="form-group-sm">
+                                <label>Numero de casa y nombre de la calles:</label>
+
+                                <textarea type="text" class="form-control" maxlength="1000" placeholder="Numero de casa y nombre de la calles" id="txtDireccion2" rows="3"></textarea>
+                            </div>
+
+                        </div>
+                        <div id="ltxtDireccion3" class="col-md-12">
+                            <div class="form-group-sm">
+                                <label>Apartamento, habitacion, etc. (opcional):</label>
+
+                                <textarea type="text" class="form-control" maxlength="1000" placeholder="Apartamento, habitacion, etc. (opcional)" id="txtDireccion3" rows="3"></textarea>
+                            </div>
+
+                        </div>
+                        <div id="ltxtDescripcion" class="col-md-12">
+                            <div class="form-group-sm">
+                                <label>Notas sobre el pedido:</label>
+                                <textarea id="txtDescripcion" class="form-control" maxlength="1500" placeholder="Notas sobre el pedido" rows="3" required="required"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+
+                        </div>
+
+
+
+
+
+
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div id="formGestion" class="container-fluid">
+                                        <div class="row">
+
+                                            <div class="col-lg-1 col-md-1 col-md-1">
+                                                <button id="btnNuevoDetalle" class="btn btn-secondary btn-sm rounded float-right" title="Adicionar">
+                                                    <img src="~/Content/open-iconic/svg/plus.svg" alt="Adicionar">
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="demo-container">
+                                            <div id="gridDetalle"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+
+
+                        </div>
+
+
+
+
+                        <div class="col-md-7 col-sm-12 col-xs-12 smt-40 xmt-40">
+                            <div class="htc__cart__total">
+                                <div style="background-color:#ebebeb">
+                                    <h6>Carta del total</h6>
+
+                                    <div id="lENVIO" class="form-group-sm">
+                                        <label>Envio:</label>
+
+                                        <select class="form-control" id="ENVIO" onchange="Envio()">
+                                            <option value="1">CONTRA ENTREGA</option>
+                                            <option value="2">PAGO EN LINEA</option>
+                                            <option value="4">NO</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="cart__desk__list">
+
+
+
+                                        <ul class="cart__desc">
+                                            <li>SUB TOTAL:</li>
+                                            <li>ENVIO:</li>
+                                            <li>TOTAL:</li>
+                                        </ul>
+                                        <ul class="cart__price">
+                                            <li id="txtsubtotalPedido"></li>
+                                            <li id="Envio30"> Bs. 30</li>
+                                            <li id="txtTotalPedido"></li>
+                                        </ul>
+                                    </div>
+                                    <br />
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-bd-primary" id="btnGuardarNota">Guardar</button>
+
+                    <button class="btn btn-bd-primary" id="btnImprimirNota">Imprimir</button>
+                    <a id="btnCancelar" class="btn btn-bd-download" href="#"
+                       data-dismiss="modal">Cancelar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+ 
+
+    <div class="modal fade modalPersonalizado" id="EliminarModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-mensaje-modal">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnEliminar">Aceptar</button>
+                    <a id="btnCancelarEliminar" class="btn btn-link" href="#"
+                       data-dismiss="modal">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .TablaCompleta:hover {
+        background: #c4c0c0;
+        cursor: pointer;
+    }
+
+    .TablaCompleta {
+        width: 80%;
+        border: #cacaca 1px solid;
+    }
+
+
+    .alinearcentro {
+        text-align: center;
+    }
+
+    .alinearderecha {
+        text-align: right;
+    }
+</style>
+<script>
+
+    $('#IdProductoSelect').select2({
+        dropdownParent: $('#AgregarDetalle')
+    });
+</script>
+<script src="~/JS/ListaVentaPorEntregar.js?v=2"></script>
